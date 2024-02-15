@@ -12,6 +12,8 @@ class QuestionsScreen extends StatefulWidget {
 }
 
 class _QuestionsScreenState extends State<QuestionsScreen> {
+  final currentQuestion = questions[0]; // Start with the first question
+
   @override
   Widget build(context) {
     return SizedBox(
@@ -19,14 +21,23 @@ class _QuestionsScreenState extends State<QuestionsScreen> {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Text(questions[0].text, style: const TextStyle(color: Colors.white)),
+          Text(
+            currentQuestion.text,
+            style: const TextStyle(color: Colors.white),
+          ),
           const SizedBox(
             height: 30,
           ),
-          AnswerButton(questions[0].answers[0], () {}),
-          AnswerButton(questions[0].answers[1], () {}),
-          AnswerButton(questions[0].answers[2], () {}),
-          AnswerButton(questions[0].answers[3], () {}),
+          //As we want to dynamically assign buttons, we use the following code.
+          ...currentQuestion.answers.map((answer) {
+            //Without the '...' keyword before a list, another list would be returned.
+            //... allows us to take out the elements of the list one by one. Column expects widgets, not lists, therefore we use this function.
+            return AnswerButton(answer, () {});
+          })
+          // AnswerButton(currentQuestion.answers[0], () {}),
+          // AnswerButton(currentQuestion.answers[1], () {}),
+          // AnswerButton(currentQuestion.answers[2], () {}),
+          // AnswerButton(currentQuestion.answers[3], () {}),
         ],
       ),
     );
