@@ -18,27 +18,32 @@ class _QuestionsScreenState extends State<QuestionsScreen> {
   Widget build(context) {
     return SizedBox(
       width: double.infinity,
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Text(
-            currentQuestion.text,
-            style: const TextStyle(color: Colors.white),
-          ),
-          const SizedBox(
-            height: 30,
-          ),
-          //As we want to dynamically assign buttons, we use the following code.
-          ...currentQuestion.answers.map((answer) {
-            //Without the '...' keyword before a list, another list would be returned.
-            //... allows us to take out the elements of the list one by one. Column expects widgets, not lists, therefore we use this function.
-            return AnswerButton(answer, () {});
-          })
-          // AnswerButton(currentQuestion.answers[0], () {}),
-          // AnswerButton(currentQuestion.answers[1], () {}),
-          // AnswerButton(currentQuestion.answers[2], () {}),
-          // AnswerButton(currentQuestion.answers[3], () {}),
-        ],
+      child: Container(
+        margin: const EdgeInsets.all(40),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            Text(
+              currentQuestion.text,
+              style: const TextStyle(color: Colors.white),
+              textAlign: TextAlign.center,
+            ),
+            const SizedBox(
+              height: 30,
+            ),
+            //As we want to dynamically assign buttons, we use the following code.
+            ...currentQuestion.answers.map((answer) {
+              //Without the '...' keyword before a list, another list would be returned.
+              //... allows us to take out the elements of the list one by one. Column expects widgets, not lists, therefore we use this function.
+              return AnswerButton(answer, () {});
+            })
+            // AnswerButton(currentQuestion.answers[0], () {}),
+            // AnswerButton(currentQuestion.answers[1], () {}),
+            // AnswerButton(currentQuestion.answers[2], () {}),
+            // AnswerButton(currentQuestion.answers[3], () {}),
+          ],
+        ),
       ),
     );
   }
