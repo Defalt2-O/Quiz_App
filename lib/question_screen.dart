@@ -12,10 +12,18 @@ class QuestionsScreen extends StatefulWidget {
 }
 
 class _QuestionsScreenState extends State<QuestionsScreen> {
-  final currentQuestion = questions[0]; // Start with the first question
+  var currentQuestionIndex = 0;
+
+  void answerQuestion() {
+    setState(() {
+      currentQuestionIndex++;
+    });
+  }
 
   @override
   Widget build(context) {
+    final currentQuestion =
+        questions[currentQuestionIndex]; // Start with the first question
     return SizedBox(
       width: double.infinity,
       child: Container(
@@ -36,7 +44,7 @@ class _QuestionsScreenState extends State<QuestionsScreen> {
             ...currentQuestion.getShuffledAnswers().map((answer) {
               //Without the '...' keyword before a list, another list would be returned.
               //... allows us to take out the elements of the list one by one. Column expects widgets, not lists, therefore we use this function.
-              return AnswerButton(answer, () {});
+              return AnswerButton(answer, answerQuestion);
             })
             // AnswerButton(currentQuestion.answers[0], () {}),
             // AnswerButton(currentQuestion.answers[1], () {}),
