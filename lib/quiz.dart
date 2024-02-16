@@ -13,7 +13,7 @@ class Quiz extends StatefulWidget {
 
 class _QuizState extends State<Quiz> {
   var activeScreen = 'start-screen';
-
+  final List<String> selectedAnswers = [];
 /*
   Widget? activeScreen; //We cannot declare a variable with a type, without initialization. However, we need this as both
   StartScreen and QuestionsScreen are widgets, which need to be stored in a container that will allow state change.
@@ -41,12 +41,16 @@ class _QuizState extends State<Quiz> {
     });
   }
 
+  void answerQuestion(String answer) {
+    selectedAnswers.add(answer);
+  }
+
   @override
   Widget build(context) {
     Widget screenWidget = StartScreen(switchScreen);
 
     if (activeScreen == 'questions-screen') {
-      screenWidget = const QuestionsScreen();
+      screenWidget = QuestionsScreen(answerQuestion);
     }
 
     return MaterialApp(
