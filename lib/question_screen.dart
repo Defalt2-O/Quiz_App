@@ -18,7 +18,9 @@ class _QuestionsScreenState extends State<QuestionsScreen> {
   var currentQuestionIndex = 0;
 
   void answerQuestion(selectedAnswer) {
-    widget.onSelectingAnswer(selectedAnswer);
+    widget.onSelectingAnswer(
+        selectedAnswer); // the widget. refers to the parent widget (QuestionsScreen).
+    //It allows us to access data from the parent class.
     setState(() {
       currentQuestionIndex++;
     });
