@@ -10,8 +10,21 @@ class QuestionsSummary extends StatelessWidget {
       children: summaryData.map((data) {
         return Row(
           children: [
-            Text(((data['questions_index'] as int) + 1).toString()),
+            Text(((data['questionIndex'] as int) + 1).toString()),
             // Type casting is done above as the data eeds to be converted into a string from an integer
+            Expanded(
+              //Expanded forces the content within it to fit within the borders of the immediate parent i.e. Row or Column.
+              child: Column(
+                children: [
+                  Text(data['question'] as String),
+                  const SizedBox(
+                    height: 5,
+                  ),
+                  Text(data['chosenAnswer'] as String),
+                  Text(data['correctAnswer'] as String),
+                ],
+              ),
+            )
           ],
         );
       }).toList(),
